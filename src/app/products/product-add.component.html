@@ -1,0 +1,105 @@
+<div class='panel panel-primary'>
+  <div class='panel-heading'>
+      <h2 class="heading">Add New Product</h2>
+  </div>
+
+  <div class='panel-body'>
+
+    <div class="container">
+      <spinner *ngIf="isLoading"></spinner> 
+      <form (submit)="onSave()" [formGroup]="productForm" *ngIf="!isLoading">   
+        <div class="row">        
+        
+            <div class="col-md-5">
+               <input type="hidden" 
+                        id="productId"                          
+                        formControlName="productId"
+                        class="form-control"                        
+                        placeholder="Product ID">
+              <div class="form-group">
+                  <label>Product Name:</label>
+                  <input type="text" 
+                        id="productName"                          
+                        formControlName="productName"
+                        class="form-control"
+                        placeholder="Product Name"
+                        >
+                    <div *ngIf="productName.touched && productName.invalid" class="alert alert-danger">
+                        <div *ngIf="productName.errors.required">Please enter product name.</div>
+                        <div *ngIf="productName.errors.minlength">Product name should be minimum {{productName.errors.minlength.requiredLength}} characters.</div>
+                    </div> 
+              </div>
+              <div class="form-group">
+                <label>Product Code:</label>
+                <input type="text" 
+                      id="productCode"                          
+                      formControlName="productCode" 
+                      class="form-control"
+                      placeholder="Product Code"
+                      >
+                      <div *ngIf="productCode.touched && productCode.invalid" class="alert alert-danger">Please enter product code.</div>
+              </div>
+              
+              <div class="form-group">
+                <label>Description:</label>
+                <textarea id="description"                          
+                      formControlName="description" 
+                      class="form-control"
+                      ></textarea>                      
+                  <div *ngIf="description.touched && description.invalid" class="alert alert-danger">Please enter product description.</div>
+              </div>
+            </div>
+            <div class="col-md-5">  
+              <div class="form-group">
+                <label>Price:</label>
+                <input type="text" 
+                      id="price"                          
+                      formControlName="price" 
+                      class="form-control"
+                      >
+                  <div *ngIf="price.touched && price.invalid" class="alert alert-danger">Please enter product price.</div>
+              </div>
+              
+                          
+              <div class="form-group">
+                  <label>Rating:</label>
+                  <input type="text" 
+                        id="starRating" 
+                        formControlName="starRating"
+                        class="form-control"
+                        >
+                    <span *ngIf="starRating.touched && starRating.invalid" class="alert alert-danger">Please enter rating.</span>
+              </div>
+              <div class="form-group">
+                <label>Release Date:</label>
+                <input type="text" 
+                        id="releaseDate"                          
+                        formControlName="releaseDate" 
+                        class="form-control"
+                        >
+                <span *ngIf="releaseDate.touched && releaseDate.invalid" class="alert alert-danger">Please enter release date.</span>
+            </div>
+
+            <div class="form-group">
+                <button type="button" (click)="filepicker.click()">Pick Image</button>
+                <input type="file" #filepicker (change)="onImagePicked($event)" >
+                </div>
+                <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview">
+                <img type="text" [src]="imagePreview" [alt]="productName">
+                <input type="hidden" id="imageUrl" formControlName="imageUrl">
+                </div>   
+            </div> 
+                                        
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <button type="submit" name="submit" class="btn btn-primary" [disabled]="productForm.invalid" >Save</button>
+                &nbsp;
+                <button type="button" name="cancel" class="btn btn-warning" (click)="onCancel()">Cancel</button>
+            </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>

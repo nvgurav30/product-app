@@ -1,0 +1,46 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        <h2 class="heading">Create New Customer</h2>
+    </div>
+  
+    <div class='panel-body'>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+
+              <form name="custForm" #customerForm="ngForm">
+                <div class="form-group">
+                    <label>Name:</label>
+                    <input type="text" 
+                          name="name"                          
+                          [(ngModel)]="customer.name" 
+                          class="form-control"
+                          required
+                          >
+                      <span *ngIf="!customerForm.valid">Please enter customer name.</span>
+                </div>
+                <div class="form-group">
+                    <label>Total Order:</label>
+                    <input type="text" 
+                          name="totalOrder" 
+                          [(ngModel)]="customer.totalOrder" 
+                          class="form-control"
+                          required
+                          >
+                </div>
+                <button type="submit" name="submit" class="btn btn-primary">Save</button>
+            </form>
+          </div>
+          <div class="col-md-5">
+              <label>Customer Details:</label>
+            <pre>
+              {{customer|json}}
+            </pre>
+         
+          </div>
+        </div>
+      </div>
+
+    </div>
+</div>
